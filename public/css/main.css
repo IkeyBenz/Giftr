@@ -5,8 +5,7 @@ a.nav-link {
     padding: 12px 8px;
     margin: 0px 8px;
 }
-a.nav-link:hover {
-    color: white;
+a.nav-link:hover, a.active {
     border-bottom: 4px solid white;
 }
 .overlay {
@@ -22,4 +21,13 @@ div.background {
 }
 #about {
     height: calc(100vw * 620 / 1240);
+}
+
+.signupPage {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0px;
+    padding-top: 20vh;
+    background-color: rgba(0,0,0,0.6);
 }

@@ -22,8 +22,8 @@
             {{#if authenticatedUser}}
             <li class="nav-item"><a href="/signout" class="nav-link">Sign Out</a></li>
             {{else}}
-            <li class="nav-item"><a href="/signup" class="nav-link">Sign Up</a></li>
-            <li class="nav-item"><a href="/signin" class="nav-link">Sign In</a></li>
+            <li class="nav-item"><a href="/pages/signup" class="nav-link{{#if signup}} active{{/if}}">Sign Up</a></li>
+            <li class="nav-item"><a href="/pages/signin" class="nav-link{{#if signin}} active{{/if}}">Sign In</a></li>
             {{/if}}
         </ul>
     </header>

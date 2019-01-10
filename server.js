@@ -13,11 +13,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('cookie-parser')());
 
+app.use('/pages', (req, res, next) => {
+    const url = req.originalUrl,
+        route = url.split('/')[2];
+    res.locals[route] = true;
+    next();
+}, require('./controllers/pages'));
+
+app.use('/api', require('./controllers/api'));
+
 app.get('/', (req, res) => {
     res.render('home');
 });
-
-app.use('/api', require('./controllers/api'));
 
 // Code for when I migrate to REACT template:
 
