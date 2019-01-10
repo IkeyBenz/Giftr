@@ -9,12 +9,17 @@ a.nav-link:hover {
     color: white;
     border-bottom: 4px solid white;
 }
-#about {
-    height: calc(100vw * 640 / 1240);
-    background-image: url('/images/landing.jpg');
-    background-size: cover;
-}
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
+    padding-top: 15%;
+}
+div.background {
+    background-image: url('/images/landing.jpg');
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    background-attachment: fixed;
+}
+#about {
+    height: calc(100vw * 620 / 1240);
 }
