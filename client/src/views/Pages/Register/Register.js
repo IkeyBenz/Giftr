@@ -5,11 +5,6 @@ class Register extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      name: '',
-      email: '',
-      password: ''
-    }
     this.handleChangedInput = this.handleChangedInput.bind(this);
     this.handleRegister = this.handleRegister.bind(this);
   }
@@ -21,14 +16,19 @@ class Register extends Component {
   }
   handleRegister(e) {
     e.preventDefault();
-    console.log(this.state);
-
+    const data = new FormData(e.target),
+      user = {
+        name: data.get('name'),
+        email: data.get('email'),
+        password: data.get('password')
+      }
     fetch('/api/auth/signup', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(user)
     }).then(res => res.json())
       .then(json => {
+        // TODO: Make this an alert
         console.log(json)
       });
   }
@@ -50,13 +50,13 @@ class Register extends Component {
                           <i className="icon-user"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" name="name" placeholder="Full Name" autoComplete="name" onChange={this.handleChangedInput} />
+                      <Input type="text" name="name" placeholder="Full Name" autoComplete="name" />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>@</InputGroupText>
                       </InputGroupAddon>
-                      <Input type="text" name="email" placeholder="Email" autoComplete="email" onChange={this.handleChangedInput} />
+                      <Input type="text" name="email" placeholder="Email" autoComplete="email" />
                     </InputGroup>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
@@ -64,7 +64,7 @@ class Register extends Component {
                           <i className="icon-lock"></i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" name="password" placeholder="Password" autoComplete="new-password" onChange={this.handleChangedInput} />
+                      <Input type="password" name="password" placeholder="Password" autoComplete="new-password" />
                     </InputGroup>
                     {/* <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">

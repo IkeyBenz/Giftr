@@ -28,7 +28,11 @@ class DefaultHeader extends Component {
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
-        <Nav className="d-md-down-none" navbar>
+        {/* These two divs are temporary to keep the toggler above^^ to the left */}
+        <div className="d-md-down-none"></div>
+        <div className="ml-auto"></div>
+
+        {/* <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
             <NavLink href="/">Dashboard</NavLink>
           </NavItem>
@@ -38,8 +42,8 @@ class DefaultHeader extends Component {
           <NavItem className="px-3">
             <NavLink href="#">Settings</NavLink>
           </NavItem>
-        </Nav>
-        <Nav className="ml-auto" navbar>
+        </Nav> */}
+        {/* <Nav className="ml-auto" navbar>
           <NavItem className="d-md-down-none">
             <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
           </NavItem>
@@ -69,8 +73,8 @@ class DefaultHeader extends Component {
               <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
           </AppHeaderDropdown>
-        </Nav>
-        <AppAsideToggler className="d-md-down-none" />
+        </Nav> */}
+        {/* <AppAsideToggler className="d-md-down-none" /> */}
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}
       </React.Fragment>
     );
