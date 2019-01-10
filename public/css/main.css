@@ -1,0 +1,20 @@
+a.nav-link {
+    color: white;
+    border-bottom: 4px solid rgba(0,0,0,0);
+    transition: all 0.15s linear;
+    padding: 12px 8px;
+    margin: 0px 8px;
+}
+a.nav-link:hover {
+    color: white;
+    border-bottom: 4px solid white;
+}
+#about {
+    height: calc(100vw * 640 / 1240);
+    background-image: url('/images/landing.jpg');
+    background-size: cover;
+}
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+}
