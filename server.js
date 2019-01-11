@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 require('./data/database');
@@ -38,7 +40,7 @@ app.use('/',
 //     });
 // }
 
-app.listen(5000, console.log('Running Giftr on port 5000'));
+app.listen(PORT, console.log('Running Giftr on port ' + PORT));
 
 module.exports = app;
 
