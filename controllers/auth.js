@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const auth = require('express').Router();
@@ -17,9 +16,10 @@ auth.post('/signup', (req, res) => {
         const n = req.body.name,
             firstName = n.indexOf(' ') > -1 ? n.slice(0, n.indexOf(' ')) : n,
             message = `Welcome ${firstName}! We've successfully created your account.`;
-        res.status(200).json(message);
+        // res.status(200).json(message);
+        res.redirect(`/dashboard/?success=${message}`);
     }).catch(error => {
-        res.redirect(`/?error=${error.message}`);
+        res.redirect(`/signin/?error=${error.message}`);
     });
 });
 
@@ -29,16 +29,17 @@ auth.post('/signin', (req, res) => {
             user.comparePassword(req.body.password, (error, matched) => {
                 if (matched) {
                     res.cookie('giftr', _getTokenFor(user), { maxAge: 60 * 60 * 24 * 60 });
-                    res.status(200).json(`Logged in as ${user.name}`);
+                    // res.status(200).json(`Logged in as ${user.name}`);
+                    res.redirect(`/dashboard/?success=Signed in as ${user.name}`)
                 } else {
-                    res.redirect('/?error=Incorrect Password.');
+                    res.redirect('/signin/?error=Incorrect Password.');
                 }
             })
         } else {
-            res.redirect('/?error=User does not exist.');
+            res.redirect('/signin/?error=User does not exist.');
         }
     }).catch(error => {
-        res.redirect(`/?error=${error.message}`);
+        res.redirect(`/signin/?error=${error.message}`);
     });
 });
 

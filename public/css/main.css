@@ -23,7 +23,7 @@ div.background {
     height: calc(100vw * 620 / 1240);
 }
 
-.signupPage {
+.form {
     width: 100vw;
     height: 100vh;
     position: absolute;
