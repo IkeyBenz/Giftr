@@ -1,33 +1,57 @@
 <div class="container">
     {{#if events}}
     {{#each events}}
-    <form class="card mx-auto w-75 mt-5" method="post" action="/dashboard/events/{{this._id}}/?_method=PATCH" id="{{this._id}}">
-        <div class="card-header">
-            <input readonly class="form-control-plaintext" name="title" value="{{this.title}}">
-        </div>
+    {{!-- border top lgiht border bottom dark so that when they collapse they show line in between --}}
+    <div class="card mx-auto mt-4" id="{{this._id}}">
+        <div class="row mx-0">
+            <form class="col-md px-0 border-bottom border-dark" method="post" action="/dashboard/events/{{this._id}}/?_method=PATCH">
+                {{!-- PUT FORM IN HERE --}}
+                <div class="card-header">
+                    <input readonly class="form-control-plaintext" name="title" value="{{this.title}}">
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="date" class="col-sm-4 col-form-label px-1">Date:</label>
+                        <div class="col-sm-8 px-1">
+                            <input type="datetime-local" readonly name="date" class="form-control-plaintext" value="{{this.date}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-4 col-form-label px-1">Address:</label>
+                        <div class="col-sm-8 px-1">
+                            <input type="text" readonly name="address" class="form-control-plaintext" value="{{this.address}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="description" class="col-sm-4 col-form-label px-1">Description</label>
+                        <div class="col-sm-8 px-1">
+                            <textarea name="" readonly class="form-control-plaintext" cols="10" rows="5">Come celebrate the wedding of name and name, name with us!</textarea>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="card-body">
-            <div class="form-group row">
-                <label for="date" class="col-sm-4 col-form-label">Date:</label>
-                <div class="col-sm-8">
-                    <input type="datetime-local" readonly name="date" class="form-control-plaintext" value="{{this.date}}">
+                <div class="card-footer">
+                    <button type="button" class="btn btn-dark" onclick="toggleEditability('{{this._id}}')">Edit</button>
+                    <button type="submit" class="btn btn-dark d-none">Submit</button>
+                    <button type="button" class="btn btn-danger d-none" onclick="deleteEvent('{{this._id}}')">Delete</button>
+                    <button type="button" class="btn btn-danger d-none" onclick="toggleEditability('{{this._id}}')">Cancel</button>
+                </div>
+
+            </form>
+            <div class="col px-0 h-100">
+                {{!-- PUT GIFTS IN HERE --}}
+                <div class="card-header">
+                    <input readonly class="form-control-plaintext" value="Gifts">
+                </div>
+                <div class="card-body p-1">
+                    <h6 class="text-center">New</h6>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-secondary">Expand</button>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="address" class="col-sm-4 col-form-label">Address:</label>
-                <div class="col-sm-8">
-                    <input type="text" readonly name="address" class="form-control-plaintext" value="{{this.address}}">
-                </div>
-            </div>
         </div>
-        <div class="card-footer">
-            <button type="button" class="btn btn-dark" onclick="toggleEditability('{{this._id}}')">Edit</button>
-            <button type="submit" class="btn btn-dark d-none">Submit</button>
-            <button type="button" class="btn btn-danger d-none" onclick="toggleEditability('{{this._id}}')">Cancel</button>
-        </div>
-
-    </form>
-
+    </div>
     {{/each}}
     {{else}}
     <h1>You have no events.</h1>
@@ -50,5 +74,8 @@
 
         // Toggle the display (hide/show) class on the bottom three buttons
         $(`#${id} .card-footer button`).toggleClass('d-none');
+    }
+    function deleteEvent(id) {
+
     }
 </script>
