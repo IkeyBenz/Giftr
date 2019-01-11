@@ -159,6 +159,9 @@ a.article:hover {
     min-height: 100vh;
     transition: all 0.3s;
 }
+.overflow-scroll {
+    overflow: scroll;
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES

@@ -1,0 +1,54 @@
+<div class="container">
+    {{#if events}}
+    {{#each events}}
+    <form class="card mx-auto w-75 mt-5" method="post" action="/dashboard/events/{{this._id}}/?_method=PATCH" id="{{this._id}}">
+        <div class="card-header">
+            <input readonly class="form-control-plaintext" name="title" value="{{this.title}}">
+        </div>
+
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="date" class="col-sm-4 col-form-label">Date:</label>
+                <div class="col-sm-8">
+                    <input type="datetime-local" readonly name="date" class="form-control-plaintext" value="{{this.date}}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="address" class="col-sm-4 col-form-label">Address:</label>
+                <div class="col-sm-8">
+                    <input type="text" readonly name="address" class="form-control-plaintext" value="{{this.address}}">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-dark" onclick="toggleEditability('{{this._id}}')">Edit</button>
+            <button type="submit" class="btn btn-dark d-none">Submit</button>
+            <button type="button" class="btn btn-danger d-none" onclick="toggleEditability('{{this._id}}')">Cancel</button>
+        </div>
+
+    </form>
+
+    {{/each}}
+    {{else}}
+    <h1>You have no events.</h1>
+    <a href="/dashboard/events/new" class="btn btn-dark">Create One</a>
+    {{/if}}
+</div>
+
+<script>
+    function toggleEditability(id) {
+        const inputs = $(`#${id} input`);
+
+        // Allow inputs to be editable
+        inputs.each((index, input) => {
+            input.readOnly = !input.readOnly;
+        });
+
+        // Toggle bootstrap class
+        inputs.toggleClass('form-control-plaintext');
+        inputs.toggleClass('form-control');
+
+        // Toggle the display (hide/show) class on the bottom three buttons
+        $(`#${id} .card-footer button`).toggleClass('d-none');
+    }
+</script>

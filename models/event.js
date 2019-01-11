@@ -6,8 +6,8 @@ const EventSchema = new Schema({
     host: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     gifts: [{ type: Schema.Types.ObjectId, ref: 'Gift', required: true }],
     date: { type: String, required: true },
-    totalCollected: { type: Number, default: 0.00 },
     address: { type: String, required: true },
+    totalCollected: { type: Number, default: 0.00 },
     dateCreated: { type: Date, default: Date.now() }
 });
 

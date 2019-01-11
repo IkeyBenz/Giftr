@@ -12,6 +12,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('cookie-parser')());
+app.use(require('method-override')('_method'));
 app.use(require('./middleware/auth').checkAuth);
 
 app.use('/api', require('./controllers/api'));
