@@ -5,7 +5,7 @@ const User = require('../models/user');
 function checkAuth(req, res, next) {
     if (req.cookies && req.cookies.giftr) {
         const uid = jwt.decode(req.cookies.giftr)._id;
-        User.findById(uid).then(user => {
+        User.findById(uid).populate('events').then(user => {
             res.locals.authenticatedUser = user;
             req.user = user;
             return next();
@@ -18,7 +18,7 @@ function loginRequired(req, res, next) {
     if (req.user) {
         return next();
     } else {
-        return res.render('login');
+        return res.redirect('/users/signin');
     }
 }
 

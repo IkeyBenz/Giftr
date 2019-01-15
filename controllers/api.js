@@ -1,9 +1,8 @@
 const api = require('express').Router();
 
-// Forwarding from /api
+// Authentication requests
+api.get('/auth', require('./auth'));
 
-api.use('/profile', require('./profile'));
-api.use('/auth', require('./auth'));
 
 
 module.exports = api;

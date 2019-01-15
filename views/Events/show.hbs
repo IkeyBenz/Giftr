@@ -1,13 +1,14 @@
 <div class="container">
-    {{#if events}}
-    {{#each events}}
+    {{#if authenticatedUser.events}}
+    {{#each authenticatedUser.events}}
     {{!-- border top lgiht border bottom dark so that when they collapse they show line in between --}}
     <div class="card mx-auto mt-4" id="{{this._id}}">
         <div class="row mx-0">
-            <form class="col-md px-0 border-bottom border-dark" method="post" action="/dashboard/events/{{this._id}}/?_method=PATCH">
+            <form class="col-md px-0 border-bottom border-dark" method="post" action="/events/{{this._id}}/?_method=PATCH">
                 {{!-- PUT FORM IN HERE --}}
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <input readonly class="form-control-plaintext" name="title" value="{{this.title}}">
+                    <img class="qr-code" style="width: 38px; height: 38px" src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fgiftingmadesimple.herokuapp.com%2Fevents%2F{{this._id}}" />
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
@@ -55,11 +56,37 @@
     {{/each}}
     {{else}}
     <h1>You have no events.</h1>
-    <a href="/dashboard/events/new" class="btn btn-dark">Create One</a>
+    <a href="/events/new" class="btn btn-dark">Create One</a>
     {{/if}}
+</div>
+<div class="qr-code-overlay">
+    <div class="bg-light">
+        <img id="bigQR" src="" alt="">
+        <a href=""><span id="qr-link" class="badge badge-secondary"></span></a>
+    </div>
 </div>
 
 <script>
+    /* QR-CODE ANIMATION ------------------------------------------------- */
+
+    $(document).ready(function () {
+        $('.qr-code').click(function () {
+            const newLink = $(this).prop('src') + ';size=512x512';
+            $('#bigQR').prop('src', newLink);
+            $('#bigQR').css({ width: '512px', height: '512px' });
+            $('.qr-code-overlay').fadeIn(400);
+            const link = decodeURIComponent($(this).prop('src').replace('https://api.qrserver.com/v1/create-qr-code/?data=', ''));
+            $('#qr-link').text(link);
+            $('#qr-link').parent().prop('href', link);
+        });
+        $('.qr-code-overlay').click(function () {
+            $(this).fadeOut(400);
+        });
+    });
+
+    /* ------------------------------------------------------------------- */
+
+    /* EVENT FORM -------------------------------------------------------- */
     function toggleEditability(id) {
         const inputs = $(`#${id} input`);
 
@@ -75,7 +102,5 @@
         // Toggle the display (hide/show) class on the bottom three buttons
         $(`#${id} .card-footer button`).toggleClass('d-none');
     }
-    function deleteEvent(id) {
-
-    }
+    /* -------------------------------------------------------------------- */
 </script>
