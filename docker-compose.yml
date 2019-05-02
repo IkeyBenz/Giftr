@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_DATA_DIR=/bin/data/db
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./giftr-db:/data/database
+    restart: always
+    command: mongod
+
+  web:
+    image: giftr-node:latest
+    env_file: .env
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - mongo
+
+volumes:
+  giftr-db:
