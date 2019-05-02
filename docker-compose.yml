@@ -13,10 +13,10 @@ services:
     command: mongod
 
   web:
-    image: giftr-node:latest
+    image: ikeybenz/giftr:latest
     env_file: .env
     ports:
-      - "3000:3000"
+      - "5000:5000"
     restart: always
     depends_on:
       - mongo
