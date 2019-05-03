@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const assert = require('assert');
 
 mongoose.connect(
-    process.env.MONGODB_URI || 'mongodb://localhost/giftr',
+    process.env.MONGODB_URI || 'mongodb://mongo:27017/giftr',
     { useNewUrlParser: true },
     function (error, db) {
         assert.equal(error, null);
